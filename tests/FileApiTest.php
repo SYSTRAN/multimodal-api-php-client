@@ -19,7 +19,6 @@ class FileApiTest extends PHPUnit_Framework_TestCase
         $api_key = new SplFileObject(__DIR__ . '/../apiKey.txt');
         $this->config->setApiKey("key",$api_key->fgets());
         $this->config->setHost("https://platform.systran.net:8904");
-        $this->config->setHost("https://platform.systran.net:8904");
         if(!$this->config->getApiKey("key"))
             throw new Exception("No api key found, please check your apiKey.txt file");
         $this->api_client = new \Systran\Client\ApiClient($this->config);

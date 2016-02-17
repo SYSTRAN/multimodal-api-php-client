@@ -6,6 +6,8 @@ foreach (glob(__DIR__ . "/../lib/Model/*.php") as $filename)
 {
     require_once $filename;
 }
+print " /!\ Some functions supported in this client may still be upcoming features in the SYSTRAN Platform API. In case of 500 status code please refer to https://platform.systran.net/reference/multimodal. \n";
+
 class ImageApiTest extends PHPUnit_Framework_TestCase
 {
     var $config;
@@ -22,13 +24,15 @@ class ImageApiTest extends PHPUnit_Framework_TestCase
 
     public function testImageAnalyzeLayoutPost()
     {
+        $input_file = new SplFileObject(__DIR__ . '/test.jpg');
         $image_api = new \Systran\Client\imageApi($this->api_client);
-        $this->assertNotNull($image_api->multimodalImageAnalyzeLayoutPost());
+        $this->assertNotNull($image_api->multimodalImageAnalyzeLayoutPost($input_file, "en"));
     }
     public function testImageAnalyzeRegionPost()
     {
+        $input_file = new SplFileObject(__DIR__ . '/test.jpg');
         $image_api = new \Systran\Client\imageApi($this->api_client);
-        $this->assertNotNull($image_api->multimodalImageAnalyzeRegionPost());
+        $this->assertNotNull($image_api->multimodalImageAnalyzeRegionPost($input_file, "en"));
     }
     public function testImageSupportedLanguagesGet()
     {
@@ -37,8 +41,9 @@ class ImageApiTest extends PHPUnit_Framework_TestCase
     }
     public function testImageTranscribePost()
     {
+        $input_file = new SplFileObject(__DIR__ . '/test.jpg');
         $image_api = new \Systran\Client\imageApi($this->api_client);
-        $this->assertNotNull($image_api->multimodalImageTranscribePost());
+        $this->assertNotNull($image_api->multimodalImageTranscribePost($input_file, "en"));
     }
 
 }
